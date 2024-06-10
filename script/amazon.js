@@ -1,4 +1,5 @@
-import { cart } from "./cart.js";
+import { cart,cartCount } from "./cart.js";
+
 import { products } from "../data/products.js";
 
 
@@ -62,26 +63,7 @@ products.forEach((products) => {
 });
 
 
-function cartCount(productId){
-  let matchingitem;
-    cart.forEach((item)=>{
-      if(productId === item.productId){
-       matchingitem = item;
-      }
-    });
 
-    if(matchingitem){
-      matchingitem.quantity++;
-    }
-    else{
-      cart.push(
-        {
-          productId,
-          quantity: 1
-        }
-      )
-    }
-}
 
 function numOfItems(){
   let numberOfItems = 0;
