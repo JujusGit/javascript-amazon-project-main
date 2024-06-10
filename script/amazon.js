@@ -1,5 +1,5 @@
-const jsProductsGrid = document.querySelector('.js-products-grid')
-
+const jsProductsGrid = document.querySelector('.js-products-grid');
+const jsCartQuantity = document.querySelector('.js-cart-quantity');
 let producthtML = '';
 
 products.forEach((products) => {
@@ -86,7 +86,7 @@ let numberOfItems = 0;
     cart.forEach((item)=>{
       numberOfItems += item.quantity
     })
-    console.log(numberOfItems);
-   console.log(cart)
+   
+  jsCartQuantity.innerHTML = numberOfItems;
   })
 })
