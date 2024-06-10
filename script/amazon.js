@@ -81,6 +81,12 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) =>{
         }
       )
     }
+let numberOfItems = 0;
+
+    cart.forEach((item)=>{
+      numberOfItems += item.quantity
+    })
+    console.log(numberOfItems);
    console.log(cart)
   })
 })
