@@ -19,7 +19,8 @@ if(product.id === productID){
 
 
 cartSummeryHTML += (
- `<div class="cart-item-container">
+ `<div class="cart-item-container 
+ js-cart-item-container-${matchingitem.id}">
  <div class="delivery-date">
    Delivery date: Wednesday, June 15
  </div>
@@ -104,5 +105,10 @@ link.addEventListener('click', () => {
 
 const productID = link.dataset.productId;
 removeFromCart(productID);
+
+const container = document.querySelector(`.js-cart-item-container-${productID}`);
+container.remove();
 })
 })
+
+
