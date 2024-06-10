@@ -1,4 +1,4 @@
-import { cart } from "./cart.js";
+import { cart,removeFromCart } from "./cart.js";
 import { products } from "../data/products.js";
 import { formmatCurrency } from "./utils/money.js";
 
@@ -8,7 +8,6 @@ let jsOrderSummery = document.querySelector('.js-order-summery')
 let cartSummeryHTML = '';
 cart.forEach((cartItem) => {
   const productID = cartItem.productId;
-
   let matchingitem;
 
   products.forEach((product)=>{
@@ -43,7 +42,7 @@ cartSummeryHTML += (
        <span class="update-quantity-link link-primary">
          Update
        </span>
-       <span class="delete-quantity-link link-primary">
+       <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingitem.id}">
          Delete
        </span>
      </div>
@@ -99,3 +98,11 @@ cartSummeryHTML += (
 });
 
 jsOrderSummery.innerHTML = cartSummeryHTML;
+
+document.querySelectorAll('.js-delete-link').forEach((link)=>{
+link.addEventListener('click', () => {
+
+const productID = link.dataset.productId;
+removeFromCart(productID);
+})
+})
