@@ -1,5 +1,5 @@
 import { cart,cartCount } from "./cart.js";
-
+import { formmatCurrency } from "./utils/money.js";
 import { products } from "../data/products.js";
 
 
@@ -28,7 +28,7 @@ products.forEach((products) => {
           </div>
 
           <div class="product-price">
-          $${(products.priceCents/100 * 2).toFixed(2)}
+          $${formmatCurrency(products.priceCents)}
           </div>
 
           <div class="product-quantity-container">
