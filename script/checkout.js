@@ -134,6 +134,7 @@ container.remove();
 updateCartQuabntity()
 })
 })
+
 //thiis line pf code is for the update link
 document.querySelectorAll('.js-update-link').forEach((link)=>{
   link.addEventListener('click', ()=>{ 
@@ -182,12 +183,11 @@ function updateCartQuabntity(){
   jsCheckOutAmount.innerHTML =`${cartQuantity} items`;
   
 }
-
 updateCartQuabntity();
 
 document.querySelectorAll('.js-delivery-option').forEach((element)=>{
   element.addEventListener('click', ()=>{
     const {productId, delivaryOptionId} = element.dataset;
-updateDeliveryOptions(productId, delivaryOptionId)
+    updateDeliveryOptions(productId, delivaryOptionId)
 })
 })
