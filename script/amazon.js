@@ -79,6 +79,7 @@ function updateCartQuantity(){
 }
 updateCartQuantity();
 
+
 //this code is used to display the number of items in the cart in the amazon basket
 document.querySelectorAll('.js-add-to-cart').forEach((button) =>{
   button.addEventListener('click', ()=>{
