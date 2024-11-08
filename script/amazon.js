@@ -77,6 +77,7 @@ function updateCartQuantity(){
 
   jsCartQuantity.innerHTML = cartQuantity;
 }
+
 updateCartQuantity();
 
 
