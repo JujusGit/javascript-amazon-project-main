@@ -1,4 +1,3 @@
-
 function Cart(localStorageKey){
 
   const cart = {
