@@ -47,7 +47,7 @@ let cartSummeryHTML = ' ';
           <img class="product-image" src="${matchingitem.image}">
           <div class="cart-item-details">
             <div class="product-name">${matchingitem.name}</div>
-            <div class="product-price">$${formmatCurrency(matchingitem.priceCents)}</div>
+            <div class="product-price">${matchingitem.getPrice()}</div>
             <div class="product-quantity">
               <span>SS
                 Quantity: <span class="quantity-label js-cartitem-quantity-${matchingitem.id}">${cartItem.quantity}</span>

@@ -23,14 +23,14 @@ export function renderPage(){
   
             <div class="product-rating-container">
               <img class="product-rating-stars"
-                src="images/ratings/rating-${products.rating.stars * 10}.png">
+                src="${products.getStarsUrl()}">
               <div class="product-rating-count link-primary">
                 ${products.rating.count}
               </div>
             </div>
   
             <div class="product-price">
-            $${formmatCurrency(products.priceCents)}
+              ${products.getPrice()}
             </div>
   
             <div class="product-quantity-container">
@@ -47,6 +47,8 @@ export function renderPage(){
                 <option value="10">10</option>
               </select>
             </div>
+
+            ${products.extraInfoHtml()}
   
             <div class="product-spacer"></div>
   

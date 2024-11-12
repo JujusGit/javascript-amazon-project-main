@@ -1,3 +1,49 @@
+import { formmatCurrency } from "../script/utils/money.js";
+
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails){
+    this.id = productDetails.id
+    this.image = productDetails.image
+    this.name = productDetails.name
+    this.rating = productDetails.rating
+    this.priceCents = productDetails.priceCents
+  }
+
+  getStarsUrl(){
+    return `images/ratings/rating-${this.rating.stars * 10}.png`
+  }
+
+  getPrice(){
+    return `$${formmatCurrency(this.priceCents)}`
+  }
+
+  extraInfoHtml(){
+   return '';
+  }
+}
+
+class Clothing extends Product{
+sizeChartLink;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink
+  }
+
+  extraInfoHtml(){
+    return `<a href = "${this.sizeChartLink}" target ="_blank">
+    Size Chart
+    </a>`;
+  }
+}
+
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -657,4 +703,13 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetails)=> {
+  
+  if(productDetails.type === 'clothing'){
+    return new Clothing(productDetails)
+  }
+    return new Product(productDetails)
+});
+
+
+console.log(products)
