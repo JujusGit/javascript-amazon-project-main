@@ -4,7 +4,8 @@ import { formmatCurrency } from "../utils/money.js";
 import {delivaryOptions} from "../../data/deliveryOptons.js";
 import {renderPaymentsummery} from "./paymentSummery.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { renderCheckoutHeaser } from './checkoutHeader.js'
+import { renderCheckoutHeader } from './checkoutHeader.js'
+
 
 
 export function renderOrderSummery(){
@@ -29,14 +30,16 @@ let cartSummeryHTML = ' ';
       }
     });
 
-    renderCheckoutHeaser(cart)
+
 
     const today = dayjs();
     const dateOption = today.add(chooseOption.delivaryDays, 'day');
     const dateString = dateOption.format('dddd, MMMM D');
 
     cartSummeryHTML += `
-      <div class="cart-item-container js-cart-item-container-${matchingitem.id}">
+      <div class="cart-item-container 
+      js-cart-item-container
+      js-cart-item-container-${matchingitem.id}">
         <div class="delivery-date js-delivery-date">
           Delivery date: ${dateString}
         </div>
@@ -74,7 +77,7 @@ let cartSummeryHTML = ' ';
 
   // Attach event listeners
   attachEventListeners();
-
+  
   
  
 
@@ -110,7 +113,7 @@ function attachEventListeners() {
       const container = document.querySelector(`.js-cart-item-container-${productID}`);
       renderOrderSummery();
       renderPaymentsummery();
-      renderCheckoutHeaser(cart)
+      renderCheckoutHeader(cart)
     });
   });
   
@@ -136,7 +139,7 @@ function attachEventListeners() {
         updateQuantity(productID, newQuantity);
         document.querySelector(`.js-cartitem-quantity-${productID}`).innerHTML = newQuantity;
         renderPaymentsummery();
-        renderCheckoutHeaser(cart)
+        renderCheckoutHeader(cart)
        console.log(newQuantity)
       }
     });

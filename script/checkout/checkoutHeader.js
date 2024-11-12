@@ -1,4 +1,4 @@
-export function renderCheckoutHeaser(cart){
+export function renderCheckoutHeader(cart){
   let cartQuantity = 0;
    function updateCartQuantity() {
     
