@@ -8,7 +8,7 @@ import { loadProductsFetch  } from '../data/products.js';
 
 
 async function loadPage(){
-  
+try{
   await loadProductsFetch()
 
   await  new Promise((resolve) => {
@@ -16,11 +16,15 @@ async function loadPage(){
       resolve()
     })
   })
+}
+
+catch(error){
+  console.log('unexpected error. please try again later')
+}
 
   renderCheckoutHeader(cart);
   renderPaymentsummery();
   renderOrderSummery();
-
 }
 
 loadPage()
