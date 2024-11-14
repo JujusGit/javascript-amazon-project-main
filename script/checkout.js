@@ -2,19 +2,14 @@ import {renderOrderSummery} from './checkout/orderSummery.js';
 import {renderPaymentsummery} from './checkout/paymentSummery.js';
 import { cart, loadCart } from './cart.js';
 import { renderCheckoutHeader } from './checkout/checkoutHeader.js'
-import { loadProducts  } from '../data/products.js';
+import { loadProductsFetch  } from '../data/products.js';
 //import '../data/cart-class.js';
 
 
 Promise.all(
   [
-    new Promise((resolve) => {
-      loadProducts(() => {
-        resolve();
-      });
-    }),
-
-
+   loadProductsFetch(),
+   
     new Promise((resolve) => {
       loadCart(()=> {
         resolve()
