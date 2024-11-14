@@ -31,8 +31,6 @@ products.forEach(product => {
 
 if(productID === matchingitem.id){
    eachPrice = Number((formmatCurrency(matchingitem.priceCents) * cartItem.quantity).toFixed(2))
-   
-  console.log(eachPrice, matchingitem.name)
 }
 
 delivaryOptions.forEach(option => {
@@ -54,8 +52,6 @@ function updateCartQuantity() {
   cart.forEach((cartItem) => {
     cartQuantity += cartItem.quantity;
   })
-
-  console.log(cartQuantity);
 }
 
 updateCartQuantity();

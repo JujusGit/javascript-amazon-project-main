@@ -44,6 +44,62 @@ sizeChartLink;
 }
 
 
+class Appliance extends Product{
+  instructionLink;
+  warrantyLink;
+  
+    constructor(productDetails){
+      super(productDetails);
+      this.instructionLink = productDetails.instructionslink
+      this.warrantyLink = productDetails.warrantyLink
+    }
+  
+    extraInfoHtml(){
+      return `<a href = "${this.instructionLink}" target ="_blank">
+     Instruction Link
+      </a>
+      
+      <a href = "${this.warrantyLink}" target ="_blank">
+      Warranty Link
+      </a>`;
+    }
+  }
+
+
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
+
+export let products = []
+
+export function loadProducts(fun){
+ const xhr =  new XMLHttpRequest();
+
+ xhr.addEventListener('load',  () => {
+  products = JSON.parse(xhr.response).map((productDetails)=> {
+
+    if(productDetails.type === 'clothing'){
+      return new Clothing(productDetails)
+    }
+  
+    if(productDetails.type === 'appliance'){
+      return new Appliance(productDetails)
+    }
+      return new Product(productDetails)
+  });
+
+  console.log('Load function');
+  
+  fun();
+ })
+ xhr.open('GET', 'https://supersimplebackend.dev/products');
+ xhr.send();
+}
+
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -104,7 +160,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliance",
+    instructionslink: "images/appliance-instructions.png",
+    warrantyLink:  "images/appliance-warranty.png"
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -704,12 +763,15 @@ export const products = [
     ]
   }
 ].map((productDetails)=> {
-  
+
   if(productDetails.type === 'clothing'){
     return new Clothing(productDetails)
+  }
+
+  if(productDetails.type === 'appliance'){
+    return new Appliance(productDetails)
   }
     return new Product(productDetails)
 });
 
-
-console.log(products)
+*/

@@ -1,14 +1,18 @@
 
 import { cart,cartCount } from "./cart.js";
 import { formmatCurrency } from "./utils/money.js";
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
+import '../data/car.js'
 
+loadProducts(renderProductsGrid);
 
 const jsProductsGrid = document.querySelector('.js-products-grid');
 const jsCartQuantity = document.querySelector('.js-cart-quantity');
+
+function renderProductsGrid(){
 let producthtML = '';
 
-export function renderPage(){
+ function renderPage(){
   products.forEach((products) => {
     const html = `
     <div class="product-container">
@@ -92,3 +96,4 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) =>{
    saveToStorae();
   })
 })
+}
