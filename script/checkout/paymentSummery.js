@@ -2,6 +2,7 @@ import {cart} from "../cart.js";
 import { products } from "../../data/products.js";
 import { formmatCurrency } from "../utils/money.js";
 import {delivaryOptions} from "../../data/deliveryOptons.js";
+import { addOrder } from "../../data/orders.js";
 
 export function renderPaymentsummery(){
 const paymentSummery = document.querySelector('.payment-summary');
@@ -87,7 +88,7 @@ html = `
               <div class="payment-summary-money">$${total}</div>
             </div>
   
-            <button class="place-order-button button-primary">
+            <button class="place-order-button button-primary js-place-order">
               Place your order
             </button>
           </div>
@@ -98,4 +99,24 @@ html = `
 paymentSummery.innerHTML = html;
 
 
+document.querySelector('.js-place-order').addEventListener('click', async () => {
+  try{
+    const response = await fetch('https://supersimplebackend.dev/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        cart: cart
+      })
+    })
+    const order = await response.json()
+  addOrder(order)
+  }
+  catch(error){
+    console.log('unexpected error. try again later')
+  }
+
+  window.location.href = 'orders.html';
+});
 }
