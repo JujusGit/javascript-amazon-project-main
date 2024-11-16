@@ -1,15 +1,31 @@
 import {renderOrderSummery} from './checkout/orderSummery.js';
 import {renderPaymentsummery} from './checkout/paymentSummery.js';
-import { cart, loadCart } from './cart.js';
+import { cart, loadCartFetch, loadCart} from './cart.js';
 import { renderCheckoutHeader } from './checkout/checkoutHeader.js'
 import { loadProductsFetch  } from '../data/products.js';
 //import '../data/cart-class.js';
 
 
 
+Promise.all(
+  [
+   loadProductsFetch(),
+   loadCartFetch()
+  ]
+).then(()=>{
+  renderCheckoutHeader(cart);
+  renderPaymentsummery();
+  renderOrderSummery();
+})
+
+
+
+/*
 async function loadPage(){
 try{
   await loadProductsFetch()
+  
+  await loadCartFetch()
 
   await  new Promise((resolve) => {
     loadCart(()=> {
@@ -28,6 +44,9 @@ catch(error){
 }
 
 loadPage()
+
+*/
+
 
 /*
 Promise.all(

@@ -3,6 +3,8 @@ import { products } from "../../data/products.js";
 import { formmatCurrency } from "../utils/money.js";
 import {delivaryOptions} from "../../data/deliveryOptons.js";
 import { addOrder } from "../../data/orders.js";
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
+
 
 export function renderPaymentsummery(){
 const paymentSummery = document.querySelector('.payment-summary');
@@ -16,7 +18,6 @@ let total = 0;
 cart.forEach(cartItem => {
   
 const productID = cartItem.productId;
-
 
 let matchingitem;
 let shippingPrice = 0;
@@ -109,14 +110,73 @@ document.querySelector('.js-place-order').addEventListener('click', async () => 
       body: JSON.stringify({
         cart: cart
       })
-    })
+    });
     const order = await response.json()
-  addOrder(order)
+    addOrder(order)
+   
   }
   catch(error){
     console.log('unexpected error. try again later')
   }
 
-  window.location.href = 'orders.html';
+  const today = dayjs();
+  const todayFormat = today.format('MMMM D');
+
+  cart.forEach((cartItem)=>{
+    cartItem.orderDate = todayFormat;
+  })
+  console.log(todayFormat);
+
+  window.location.href="orders.html"
 });
+}
+
+async function displayName(){
+const response = fetch('https://supersimplebackend.dev/greeting', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: "alhassan muhammad"
+  })
+});
+
+const myName = (await response).text();
+console.log(myName);
+}
+
+async function getError(){
+  try{
+    const errorMessage = await fetch('https://amazon.com');
+  }
+  catch(error){
+    console.log('CORS error. your request was blocked by the backend')
+  }
+}
+
+async function postGreeting() {
+  try {
+    const response = await fetch('https://supersimplebackend.dev/greeting', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.status >= 400) {
+      throw response;
+    }
+
+    const text = await response.text();
+    console.log(text);
+
+  } catch (error) {
+    if (error.status === 400) {
+      const errorMessage = await error.json();
+      console.log(errorMessage);
+    } else {
+      console.log('Network error. Please try again later.');
+    }
+  }
 }

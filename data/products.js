@@ -6,6 +6,7 @@ class Product {
   name;
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails){
     this.id = productDetails.id
@@ -13,6 +14,7 @@ class Product {
     this.name = productDetails.name
     this.rating = productDetails.rating
     this.priceCents = productDetails.priceCents
+    this.keywords = productDetails.keywords;
   }
 
   getStarsUrl(){
@@ -81,7 +83,6 @@ export function loadProductsFetch(){
     return response.json()
   }).then((productsData) => {
     products = productsData.map((productDetails)=> {
-
       if(productDetails.type === 'clothing'){
         return new Clothing(productDetails)
       }
@@ -100,12 +101,42 @@ export function loadProductsFetch(){
   return Promise
 }
 
-
 /*
 loadProductsFetch().then(() => {
   console.log('next Step')
 })
 */
+
+export function getProduct(productID){
+  let matchingItem
+  products.forEach((product) => {
+    if(product.id === productID){
+      matchingItem = product
+    }
+  })
+  return matchingItem;
+}
+
+
+export async function loadGreetingAwait(){
+ const response = await fetch('https://supersimplebackend.dev/greeting');
+ const text = await response.text();
+ console.log(text);
+}
+
+
+export function loadGreetings(){
+
+  const secondPromise = fetch('https://supersimplebackend.dev/greeting').then((response)=>{
+
+      return response.text();
+
+  }).then((text) => {
+      console.log(text);
+  });
+
+  return secondPromise;
+}
 
 
 export function loadProducts(fun){
@@ -127,11 +158,28 @@ export function loadProducts(fun){
   console.log('Load function');
 
   fun();
- })
+ });
+
  xhr.open('GET', 'https://supersimplebackend.dev/products');
  xhr.send();
 }
- 
+
+
+/*let greeting = '';
+
+export function loadGreetings(){
+
+  const xml2 =  new XMLHttpRequest();
+
+  xml2.addEventListener('load', () => {
+    greeting = xml2.response;
+    console.log(greeting);
+  });
+
+  xml2.open('GET', 'https://supersimplebackend.dev/greeting');
+  xml2.send();
+}
+*/
 
 
 /*
